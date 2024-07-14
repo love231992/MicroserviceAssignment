@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: API_Gateway_Lovepreet
+  cloud:
+    gateway:
+      routes:
+        - id: SpringMySQL
+          uri: lb://SpringMySQL
+          predicates:
+            - Path=/hospital/**
+
+        - id: HospitalMicroservice
+          uri: lb://HospitalMicroservice
+          predicates:
+            - Path=/feign/**
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-name: Github login
+            client-id: Iv23lif0UXY7ZGOvv7U2
+            client-secret: 52ca3ca1687970bfa0960c52f1ecb076510ca3b1
+
+
+server:
+  port: 11111
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
